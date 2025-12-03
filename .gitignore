@@ -55,3 +55,9 @@ Content/StarterContent/
 
 # Optional: keep icons in Build folder
 !Build/**/*.ico
+
+# JetBrains Rider
+.idea/
+*.idea/
+.Rider/
+*.Rider/
