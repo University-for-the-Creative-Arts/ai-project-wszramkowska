@@ -11,3 +11,9 @@ This setup leverages Unreal Engine 5.6 for interactive gameplay and UI managemen
 During development, technical challenges arose in displaying the text. The AI often sends responses in chunks with additional text such as "done" markers. Attempts to parse this using Find Substring and Parse Into Array nodes sometimes removed needed text, causing broken responses in the ScrollBox. Despite this, the output log confirms that the AI responds correctly and stays in character according to the prompt. Given more time, the display issue could be fully resolved, but the main goal of integrating AI with Ollama was successfully achieved.
 
 To test the project, please download Ollama and use command "ollama pull phi3" to download the model. Once running, the Unreal project can connect to the API endpoint to send player messages and receive replies. Approach NPC and press E, then write in chat box, press enter and wait for response. 
+
+![AI-NPC](assets/ai-npc.gif)
+
+![AI-NPC](assets/ai-npc-ss.png)
+
+In this screenshot the NPC dialogue reads: "Fair traveller, come forth and seek out my apothecary". This text needs to be extracted to be correctly displayed.
