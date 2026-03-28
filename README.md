@@ -1,0 +1,19 @@
+# Commentary
+
+This project implements an AI-powered NPC dialogue system in Unreal Engine 5.6, using a locally hosted Ollama language model to enable dynamic in-game conversations. Players can interact with an NPC through a text-based chat interface. Player input is sent to the AI via HTTP requests, with the VaRest plugin handling JSON-based communication between Unreal Engine and the Ollama server. This setup allows the AI to process messages in real time and generate contextually relevant responses without relying on cloud services.
+
+The system has two main components: the BP_NPC Blueprint and the WBP_Dialogue widget. The BP_NPC detects player interactions and spawns the dialogue widget when the interact key is pressed, maintaining a reference for ongoing communication. The WBP_Dialogue widget provides the chat interface, including a ScrollBox for conversation history and an EditableTextBox for player input. When a message is submitted, the widget calls a custom event in the BP_NPC, which constructs a JSON request with the selected model and player input. This request is sent to the local Ollama server, which returns a generated response. Both player and NPC messages are dynamically displayed as TextBlock widgets in the ScrollBox, allowing the conversation to grow naturally in real time.
+
+The AI system processes the player’s text along with model metadata. Each JSON request includes a "model" field specifying the AI model (e.g., phi3) and a "prompt" field containing the player’s message. The Ollama model runs locally, processes the input using its pre-trained knowledge, and returns a textual response in JSON format. Telemetry such as inference time and model version can be logged to the output for performance evaluation.
+
+This setup leverages Unreal Engine 5.6 for interactive gameplay and UI management, VaRest for HTTP/JSON handling, and Ollama as a local generative AI model. It allows developers to test, iterate, and deploy quickly without external dependencies. By integrating AI, NPC dialogue becomes dynamic and adaptable, responding naturally to a wide range of player inputs. This enhances immersion and replayability while reducing the effort required to create branching dialogue manually.
+
+During development, technical challenges arose in displaying the text. The AI often sends responses in chunks with additional text such as "done" markers. Attempts to parse this using Find Substring and Parse Into Array nodes sometimes removed needed text, causing broken responses in the ScrollBox. Despite this, the output log confirms that the AI responds correctly and stays in character according to the prompt. Given more time, the display issue could be fully resolved, but the main goal of integrating AI with Ollama was successfully achieved.
+
+To test the project, please download Ollama and use command "ollama pull phi3" to download the model. Once running, the Unreal project can connect to the API endpoint to send player messages and receive replies. Approach NPC and press E, then write in chat box, press enter and wait for response. 
+
+![AI-NPC](assets/ai-npc.gif)
+
+![AI-NPC](assets/ai-npc-ss.png)
+
+In this screenshot the NPC dialogue reads: "Fair traveller, come forth and seek out my apothecary". This text needs to be extracted to be correctly displayed.
